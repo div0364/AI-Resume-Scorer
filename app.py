@@ -8,9 +8,16 @@ from sklearn.metrics.pairwise import cosine_similarity
 from nltk.corpus import stopwords
 from PyPDF2 import PdfReader
 
-# Download necessary NLTK resources
-nltk.download("stopwords")
-nltk.download("punkt")
+# Ensure necessary NLTK resources are downloaded
+try:
+    nltk.data.find("tokenizers/punkt")
+except LookupError:
+    nltk.download("punkt")
+
+try:
+    nltk.data.find("corpora/stopwords")
+except LookupError:
+    nltk.download("stopwords")
 
 # Check if pickle file exists, else create it
 PICKLE_FILE = "keywords.pkl"
